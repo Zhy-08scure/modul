@@ -1,4 +1,4 @@
-<?php
+
 function CheckApi() {
    print pan2.p."Register".sd.h.provider_ref.n;
    l();
@@ -299,5 +299,3 @@ Class Shortlinks {
 		}
 	}
 }
-
-?>
