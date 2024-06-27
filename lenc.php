@@ -1,4 +1,4 @@
-<?php
+
 /** ALOM Obfuscator License
  * This script has protected by Alom.
  *
