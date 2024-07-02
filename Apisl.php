@@ -233,7 +233,8 @@ Class Shortlinks {
    public $apikey;
 	function __construct($apikey){
 		#$this->host = "https://bpsl06.my.id";
-		$this->host = "https://api-bintang.my.id";
+		#$this->host = "https://api-bintang.my.id";
+                 $this->host = "https://api-xnoxs.my.id";
 		$this->apikey = $apikey;
 	}
 	function check($nama){
@@ -255,7 +256,9 @@ Class Shortlinks {
 			"wefly.me" => "fly",
 			"clicksfly" => "fly",
 			"clicksflyme" => "fly",
-			"clicksfly.me" => "fly"
+			"clicksfly.me" => "fly",
+			"revcut" => "revcut",
+			"bitad" => "bitad"
 		];
 		sleep(1);
 		$filter = $supported[$check];
