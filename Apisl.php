@@ -258,7 +258,7 @@ Class Shortlinks {
 			"clicksflyme" => "fly",
 			"clicksfly.me" => "fly",
 			"revcut" => "revcut",
-			"urlcut" => "urlcut"
+			"urlcut" => "urlcut",
 			"bitad" => "bitad",
 			"cutlink" => "cutlink"
 		];
