@@ -258,7 +258,8 @@ Class Shortlinks {
 			"clicksflyme" => "fly",
 			"clicksfly.me" => "fly",
 			"revcut" => "revcut",
-			"bitad" => "bitad"
+			"bitad" => "bitad",
+			"cutlink" => "cutlink"
 		];
 		sleep(1);
 		$filter = $supported[$check];
