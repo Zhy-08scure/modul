@@ -29,13 +29,13 @@ function MenuApi() {
    }
    return $apikey;
 }
-function ApiShortlink(){
-	if(!file_exists("../Shortlink_Apikey")){
-		print pan2.p."Register".sd.h."@bpsl06_bot".n; l();
-	}
-	return save("Shortlink_Apikey");
+function ApiShortlink() {
+   if (!file_exists("../Shortlink_Apikey")) {
+      print pan2.p."Register".sd.h."@bpsl06_bot".n; l();
+   }
+   return save("Shortlink_Apikey");
 }
-function bal($api, $dot=0) {
+function bal($api, $dot = 0) {
    if ($dot) {
       return slow(cb.p.t("Api_Bal", k."𓊈𒆜 ".h.$api->getBalance().k." 𒆜𓊉", 1));
    }
@@ -85,209 +85,211 @@ Class RequestApi {
    }
 }
 Class ApiMultibot extends RequestApi {
-	public $apikey;
-	function __construct($apikey){
-		$this->host = "http://api.multibot.in";
-		$this->provider = "multibot";
-		$this->apikey = $apikey;
-	}
-	function RecaptchaV2($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "userrecaptcha",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Hcaptcha($sitekey, $pageurl ){
-		$data = http_build_query([
-			"method" => "hcaptcha",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Turnstile($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "turnstile",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Authkong($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "authkong",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Ocr($img){
-		$data = http_build_query([
-			"method" => "universal",
-			"body" => $img
-			]);
-		return $this->getResult($data, "POST");
-	}
-	function Upsidedown($img){
-		$data = http_build_query([
-			"method" => "upside",
-			"body" => $img
-			]);
-		return $this->getResult($data, "POST");
-	}
-	function RsCap($img){
-		$data = http_build_query([
-			"method" => "rscaptcha",
-			"body" => $img
-			]);
-		return $this->getResult($data, "POST");
-	}
-	function AntiBot($source){
-		$main = explode('"',explode('src="',explode('Bot links',$source)[1])[1])[0];
-		if(!$main)return 0;
-		$data["method"] = "antibot";
-		$data["main"] = $main;
-		$src = explode('rel=\"',$source);
-		foreach($src as $x => $sour){
-			if($x == 0)continue;
-			$no = explode('\"',$sour)[0];
-			$img = explode('\"',explode('src=\"',$sour)[1])[0];
-			$data[$no] = $img;
-		}
-		$data = http_build_query($data);
-		//print_r($data);
-		$ua = "Content-type: application/x-www-form-urlencoded";
-		$res = $this->getResult($data, "POST", $ua);
-		return "+".str_replace(",","+",$res);
-	}
+   public $apikey;
+   function __construct($apikey) {
+      $this->host = "http://api.multibot.in";
+      $this->provider = "multibot";
+      $this->apikey = $apikey;
+   }
+   function RecaptchaV2($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "userrecaptcha",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Hcaptcha($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "hcaptcha",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Turnstile($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "turnstile",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Authkong($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "authkong",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Ocr($img) {
+      $data = http_build_query([
+         "method" => "universal",
+         "body" => $img
+      ]);
+      return $this->getResult($data, "POST");
+   }
+   function Upsidedown($img) {
+      $data = http_build_query([
+         "method" => "upside",
+         "body" => $img
+      ]);
+      return $this->getResult($data, "POST");
+   }
+   function RsCap($img) {
+      $data = http_build_query([
+         "method" => "rscaptcha",
+         "body" => $img
+      ]);
+      return $this->getResult($data, "POST");
+   }
+   function AntiBot($source) {
+      $main = explode('"', explode('src="', explode('Bot links', $source)[1])[1])[0];
+      if (!$main)return 0;
+      $data["method"] = "antibot";
+      $data["main"] = $main;
+      $src = explode('rel=\"', $source);
+      foreach ($src as $x => $sour) {
+         if ($x == 0)continue;
+         $no = explode('\"', $sour)[0];
+         $img = explode('\"', explode('src=\"', $sour)[1])[0];
+         $data[$no] = $img;
+      }
+      $data = http_build_query($data);
+      //print_r($data);
+      $ua = "Content-type: application/x-www-form-urlencoded";
+      $res = $this->getResult($data, "POST", $ua);
+      return "+".str_replace(",", "+", $res);
+   }
 }
 Class ApiXevil extends RequestApi {
    public $apikey;
-	function __construct($apikey){
-		$this->host = "https://sctg.xyz";
-		$this->apikey = $apikey."|SOFTID2124530010";
-	}
-	function RecaptchaV2($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "userrecaptcha",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Hcaptcha($sitekey, $pageurl ){
-		$data = http_build_query([
-			"method" => "hcaptcha",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Turnstile($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "turnstile",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Authkong($sitekey, $pageurl){
-		$data = http_build_query([
-			"method" => "authkong",
-			"sitekey" => $sitekey,
-			"pageurl" => $pageurl
-			]);
-		return $this->getResult($data, "GET");
-	}
-	function Ocr($img){
-		$data = "method=base64&body=".$img;
-		return $this->getResult($data, "POST");
-	}
-	function AntiBot($source){
-		$main = explode('"',explode('data:image/png;base64,',explode('Bot links',$source)[1])[1])[0];
-		if(!$main)return 0;
-		$data = "key=".$this->apikey."&json=1&method=antibot&main=$main";
-		$src = explode('rel=\"',$source);
-		foreach($src as $x => $sour){
-			if($x == 0)continue;
-			$no = explode('\"',$sour)[0];
-			$img = explode('\"',explode('data:image/png;base64,',$sour)[1])[0];
-			$data .= "&$no=$img";
-		}
-		$res = $this->getResult($data, "POST");
-		if($res)return "+".str_replace(",","+",$res);
-		return 0;
-	}
-	function Teaserfast($main, $small){
-		$data = http_build_query([
-			"method" => "teaserfast",
-			"main_photo" => $main,
-			"task" => $small
-		]);
-		return $this->getResult($data, "GET");
-	}
+   function __construct($apikey) {
+      $this->host = "https://sctg.xyz";
+      $this->apikey = $apikey."|SOFTID2124530010";
+   }
+   function RecaptchaV2($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "userrecaptcha",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Hcaptcha($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "hcaptcha",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Turnstile($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "turnstile",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Authkong($sitekey, $pageurl) {
+      $data = http_build_query([
+         "method" => "authkong",
+         "sitekey" => $sitekey,
+         "pageurl" => $pageurl
+      ]);
+      return $this->getResult($data, "GET");
+   }
+   function Ocr($img) {
+      $data = "method=base64&body=".$img;
+      return $this->getResult($data, "POST");
+   }
+   function AntiBot($source) {
+      $main = explode('"', explode('data:image/png;base64,', explode('Bot links', $source)[1])[1])[0];
+      if (!$main)return 0;
+      $data = "key=".$this->apikey."&json=1&method=antibot&main=$main";
+      $src = explode('rel=\"', $source);
+      foreach ($src as $x => $sour) {
+         if ($x == 0)continue;
+         $no = explode('\"', $sour)[0];
+         $img = explode('\"', explode('data:image/png;base64,', $sour)[1])[0];
+         $data .= "&$no=$img";
+      }
+      $res = $this->getResult($data, "POST");
+      if ($res)return "+".str_replace(",", "+", $res);
+      return 0;
+   }
+   function Teaserfast($main, $small) {
+      $data = http_build_query([
+         "method" => "teaserfast",
+         "main_photo" => $main,
+         "task" => $small
+      ]);
+      return $this->getResult($data, "GET");
+   }
 }
 Class Shortlinks {
    public $apikey;
-	function __construct($apikey){
-		#$this->host = "https://bpsl06.my.id";
-		#$this->host = "https://api-bintang.my.id";
-                 $this->host = "https://api-xnoxs.my.id";
-		$this->apikey = $apikey;
-	}
-	function check($nama){
-		$check = strtolower($nama);
-		print k."--[".p."?".k."] ".o."Checking Link";
-		#print k."--[".p."?".k."] ".o."Checking ".h.$check;
-		$supported = [
-			"linksfly" => "fly",
-			"linksflyme" => "fly",
-			"linksfly.me" => "fly",
-			"shortsfly" => "fly",
-			"shortsflyme" => "fly",
-			"shortsfly.me" => "fly",
-			"urlsfly" => "fly",
-			"urlsflyme" => "fly",
-			"urlsfly.me" => "fly",
-			"wefly" => "fly",
-			"weflyme" => "fly",
-			"wefly.me" => "fly",
-			"clicksfly" => "fly",
-			"clicksflyme" => "fly",
-			"clicksfly.me" => "fly",
-			"revcut" => "revcut",
-                        "urlcut" => "urlcut",
-                        "bitad" => "bitad",
-			"cutlink" => "cutlink"
-		];
-		sleep(1);
-		$filter = $supported[$check];
-		if($filter){
-			print r.centang.h."Support to bypass";
-			sleep(2); print r;
-			return ["status" => 1,"shortlink_name" => $filter];
-		}else{
-			print x("Doesn't support to bypass", d);
-			sleep(2); print r;
-			return ["status" => 0,"message" => "not supported shortlink"];
-		}
-	}
-	function Bypass($name, $shortlink){
-		a:
-		$r = json_decode(
-			file_get_contents(
-			   $this->host."/api.php?apikey=".$this->apikey."&name=".$name."&url=".$shortlink
-			),
-			true
-		);
-		if($r['status'] == "success"){
-			return $r;
-		}else{
-		   print x($r['msg'], n);
-		   unlink('cookie.txt'); sleep(10);
-		   goto a;
-		}
-	}
+   function __construct($apikey) {
+      #$this->host = "https://bpsl06.my.id";
+      #$this->host = "https://api-bintang.my.id";
+      $this->host = "https://api-xnoxs.my.id";
+      $this->apikey = $apikey;
+   }
+   function check($nama) {
+      $check = strtolower($nama);
+      print k."--[".p."?".k."] ".o."Checking Link";
+      #print k."--[".p."?".k."] ".o."Checking ".h.$check;
+      $supported = [
+         "linksfly" => "fly",
+         "linksflyme" => "fly",
+         "linksfly.me" => "fly",
+         "shortsfly" => "fly",
+         "shortsflyme" => "fly",
+         "shortsfly.me" => "fly",
+         "urlsfly" => "fly",
+         "urlsflyme" => "fly",
+         "urlsfly.me" => "fly",
+         "wefly" => "fly",
+         "weflyme" => "fly",
+         "wefly.me" => "fly",
+         "clicksfly" => "fly",
+         "clicksflyme" => "fly",
+         "clicksfly.me" => "fly",
+         "revcut" => "revcut",
+         "urlcut" => "urlcut",
+         "bitad" => "bitad",
+         "cutlink" => "cutlink"
+      ];
+      sleep(1);
+      $filter = $supported[$check];
+      if ($filter) {
+         print r.centang.h."Support to bypass";
+         sleep(2); print r;
+         return ["status" => 1,
+            "shortlink_name" => $filter];
+      } else {
+         print x("Doesn't support to bypass", d);
+         sleep(2); print r;
+         return ["status" => 0,
+            "message" => "not supported shortlink"];
+      }
+   }
+   function Bypass($name, $shortlink) {
+      a:
+      $r = json_decode(
+         file_get_contents(
+            $this->host."/api.php?apikey=".$this->apikey."&name=".$name."&url=".$shortlink
+         ),
+         true
+      );
+      if ($r['status'] == "success") {
+         return $r;
+      } else {
+         print x($r['msg'], n);
+         unlink('cookie.txt'); sleep(10);
+         goto a;
+      }
+   }
 }
