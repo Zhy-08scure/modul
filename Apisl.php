@@ -309,7 +309,7 @@ Class Shortlinks {
          return $r;
       } else {
          #print_r($r); exit;
-         print x($r['msg'], n);sleep(10);goto a;
+         print x($r['msg'], n);sleep(3);break;#sleep(10);goto a;
       }
    }
 }
