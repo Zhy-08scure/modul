@@ -169,7 +169,7 @@ Class Shortlinks{
          print x($r['msg'], n); l();
          sleep(2); break;
       } elseif ($r['error']) {
-         print "Ini error".n;
+         #print "Ini error".n;
          print x($r['error'], n); l();
          break; // error from server, prevent your balance from being problematic
       } else {
