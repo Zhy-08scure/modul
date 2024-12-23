@@ -55,9 +55,9 @@ Class Shortlinks{
       $supported = [
       ##   "earnow" => "earnow",
          "clks" => "clks",
-         "clkspro" => "clkspro",
-         "clk pro" => "clk pro",
-         "clks pro" => "clks pro",
+         #"clkspro" => "clkspro",
+         #"clk pro" => "clk pro",
+         #"clks pro" => "clks pro",
       ##   "rsshort" => "rsshort",
          "shortano" => "shortano",
          "shortino" => "shortino",
